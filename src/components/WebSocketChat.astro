@@ -327,12 +327,36 @@
     @media (max-width: 768px) {
         .chat-layout {
             grid-template-columns: 1fr;
+            gap: 0.5rem;  /* Reduzido de 1rem para 0.5rem */
+            height: calc(100vh - 100px); /* Ajustado para melhor aproveitamento vertical */
         }
 
         .online-users {
             order: -1;
-            max-height: 150px;
-            overflow-y: auto;
+            height: 120px; /* Altura fixa para o container */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #users-list {
+            flex: 1;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            display: flex;
+            gap: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .user-item {
+            flex: 0 0 auto;
+            margin-bottom: 0;
+            margin-right: 0.5rem;
+        }
+
+        .chat-main {
+            gap: 0.5rem; /* Reduzido de 1rem para 0.5rem */
+            flex: 1;
         }
     }
 </style>
