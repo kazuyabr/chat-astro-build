@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "80:80"
+    depends_on:
+      - websocket-server
+
+  websocket-server:
+    build: 
+      context: .
+      dockerfile: Dockerfile.ws
+    ports:
+      - "3000:3000"

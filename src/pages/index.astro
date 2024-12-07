@@ -1,0 +1,131 @@
+---
+import WebSocketChat from '../components/WebSocketChat.astro';
+---
+
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chat com AstroBuild</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M20,18c1.1,0,2-0.9,2-2V6c0-1.1-0.9-2-2-2H4C2.9,4,2,4.9,2,6v10c0,1.1,0.9,2,2,2H0v2h24v-2H20z M4,6h16v10H4V6z"/>
+          </svg>
+        </div>
+        <h1>Chat com AstroBuild</h1>
+        <button id="theme-toggle" class="theme-button">
+          <span class="material-icons-round">dark_mode</span>
+        </button>
+      </header>
+      <main>
+        <WebSocketChat />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  :root[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --border-color: #dee2e6;
+    --accent-color: #228be6;
+    --accent-hover: #1c7ed6;
+    --success-color: #40c057;
+    --error-color: #fa5252;
+  }
+
+  :root[data-theme="dark"] {
+    --bg-primary: #1a1b1e;
+    --bg-secondary: #25262b;
+    --bg-tertiary: #2c2e33;
+    --text-primary: #e9ecef;
+    --text-secondary: #adb5bd;
+    --border-color: #373a40;
+    --accent-color: #74c0fc;
+    --accent-hover: #4dabf7;
+    --success-color: #69db7c;
+    --error-color: #ff6b6b;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    gap: 1rem;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  main {
+    flex: 1;
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .theme-button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+
+  .theme-button:hover {
+    background-color: var(--bg-tertiary);
+  }
+</style>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const icon = themeToggle.querySelector('.material-icons-round');
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', newTheme);
+    icon.textContent = newTheme === 'light' ? 'dark_mode' : 'light_mode';
+  });
+</script>
