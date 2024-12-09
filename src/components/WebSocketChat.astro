@@ -1,12 +1,12 @@
 ---
 ---
 <div class="chat-layout">
-    <div class="online-users">
+    <div class="online-users" style="border: 1px solid var(--border-color);">
         <h3>Usuários Online</h3>
         <div id="users-list"></div>
     </div>
     <div class="chat-main">
-        <div class="user-info">
+        <div class="user-info" style="border: 1px solid var(--border-color);">
             <span class="user-label">Seu nickname:</span>
             <div class="nickname-display">
                 <span id="nickname"></span>
@@ -18,7 +18,7 @@
             </div>
         </div>
         
-        <div class="chat-container">
+        <div class="chat-container" style="border: 1px solid var(--border-color);">
             <div id="messages" class="messages"></div>
             <div class="input-area">
                 <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
@@ -213,16 +213,24 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+      .user-actions {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: flex-end;
+      }
 
-    .user-actions {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: flex-end;
-    }
+      .chat-container {
+          display: flex;
+          flex-direction: column;
 
-    .chat-container {
-        display: flex;
-        flex-direction: column;
+      @media (max-width: 768px) {
+          .online-users {
+              order: -1;
+              height: 120px;
+              display: flex;
+              flex-direction: column;
+          }
+      }
         flex: 1;
         background-color: var(--bg-secondary);
         border-radius: 8px;
@@ -248,7 +256,31 @@
     .input-area {
         display: flex;
         gap: 0.5rem;
+
+    .online-users {
+        background-color: var(--bg-secondary);
+        border-radius: 8px;
         padding: 1rem;
+        max-width: 250px;
+        width: 100%;
+    }
+
+    #users-list {
+        max-width: 230px;
+        overflow-x: auto;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .user-item {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        margin-right: 0.5rem;
+    }        padding: 1rem;
         background-color: var(--bg-tertiary);
     }
 
@@ -335,25 +367,26 @@
             order: -1;
             height: 120px; /* Altura fixa para o container */
             display: flex;
-            flex-direction: column;
+            flex-direction: column;            
+            max-width: 92vw;
         }
+          #users-list {
+              max-width: 100%;
+              overflow-x: auto;
+              display: flex;
+              flex-wrap: nowrap;
+              gap: 0.5rem;
+              padding-bottom: 0.5rem;
+              /* Adiciona uma barra de rolagem suave */
+              scrollbar-width: thin;
+              -webkit-overflow-scrolling: touch;
+          }
 
-        #users-list {
-            flex: 1;
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            display: flex;
-            gap: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-
-        .user-item {
-            flex: 0 0 auto;
-            margin-bottom: 0;
-            margin-right: 0.5rem;
-        }
-
+          .user-item {
+              flex: 0 0 auto;
+              white-space: nowrap;
+              margin-right: 0.5rem;
+          }
         .chat-main {
             gap: 0.5rem; /* Reduzido de 1rem para 0.5rem */
             flex: 1;
